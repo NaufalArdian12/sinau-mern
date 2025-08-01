@@ -12,7 +12,7 @@ export default function Students() {
       <div className="card flex items-center gap-5">
         <div className="flex shrink-0 w-20 h-20 rounded-[20px] bg-[#D9D9D9] overflow-hidden">
           <img
-            src="assets/images/photos/photo-2.png"
+            src="/assets/images/photos/photo-2.png"
             className="w-full h-full object-cover"
             alt="thumbnail"
           />
@@ -22,7 +22,7 @@ export default function Students() {
             Yulia Putri
           </h3>
           <div className="flex items-center gap-[6px] mt-[6px]">
-            <img src="assets/images/icons/crown-purple.svg" alt="icon" />
+            <img src="/assets/images/icons/crown-purple.svg" alt="icon" />
             <p className="text-[#838C9D]">183 Course Joined</p>
           </div>
         </div>
@@ -30,7 +30,7 @@ export default function Students() {
       <div className="card flex items-center gap-5">
         <div className="flex shrink-0 w-20 h-20 rounded-[20px] bg-[#D9D9D9] overflow-hidden">
           <img
-            src="assets/images/photos/photo-3.png"
+            src="/assets/images/photos/photo-3.png"
             className="w-full h-full object-cover"
             alt="thumbnail"
           />
@@ -40,7 +40,7 @@ export default function Students() {
             Angga Risky Setiawan
           </h3>
           <div className="flex items-center gap-[6px] mt-[6px]">
-            <img src="assets/images/icons/crown-purple.svg" alt="icon" />
+            <img src="/assets/images/icons/crown-purple.svg" alt="icon" />
             <p className="text-[#838C9D]">183 Course Joined</p>
           </div>
         </div>
@@ -48,7 +48,7 @@ export default function Students() {
       <div className="card flex items-center gap-5">
         <div className="flex shrink-0 w-20 h-20 rounded-[20px] bg-[#D9D9D9] overflow-hidden">
           <img
-            src="assets/images/photos/photo-4.png"
+            src="/assets/images/photos/photo-4.png"
             className="w-full h-full object-cover"
             alt="thumbnail"
           />
@@ -58,7 +58,7 @@ export default function Students() {
             Shayna Wo
           </h3>
           <div className="flex items-center gap-[6px] mt-[6px]">
-            <img src="assets/images/icons/crown-purple.svg" alt="icon" />
+            <img src="/assets/images/icons/crown-purple.svg" alt="icon" />
             <p className="text-[#838C9D]">183 Course Joined</p>
           </div>
         </div>
@@ -66,7 +66,7 @@ export default function Students() {
       <div className="card flex items-center gap-5">
         <div className="flex shrink-0 w-20 h-20 rounded-[20px] bg-[#D9D9D9] overflow-hidden">
           <img
-            src="assets/images/photos/photo-5.png"
+            src="/assets/images/photos/photo-5.png"
             className="w-full h-full object-cover"
             alt="thumbnail"
           />
@@ -76,7 +76,7 @@ export default function Students() {
             Imanual Kod
           </h3>
           <div className="flex items-center gap-[6px] mt-[6px]">
-            <img src="assets/images/icons/crown-purple.svg" alt="icon" />
+            <img src="/assets/images/icons/crown-purple.svg" alt="icon" />
             <p className="text-[#838C9D]">183 Course Joined</p>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function Students() {
       <div className="card flex items-center gap-5">
         <div className="flex shrink-0 w-20 h-20 rounded-[20px] bg-[#D9D9D9] overflow-hidden">
           <img
-            src="assets/images/photos/photo-3.png"
+            src="/assets/images/photos/photo-3.png"
             className="w-full h-full object-cover"
             alt="thumbnail"
           />
@@ -94,7 +94,7 @@ export default function Students() {
             Battita Gunber
           </h3>
           <div className="flex items-center gap-[6px] mt-[6px]">
-            <img src="assets/images/icons/crown-purple.svg" alt="icon" />
+            <img src="/assets/images/icons/crown-purple.svg" alt="icon" />
             <p className="text-[#838C9D]">183 Course Joined</p>
           </div>
         </div>
