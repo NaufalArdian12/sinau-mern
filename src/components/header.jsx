@@ -16,7 +16,7 @@ export default function Header() {
           placeholder="Search course, student, other file..."
         />
         <img
-          src="assets/images/icons/search-normal.svg"
+          src="/assets/images/icons/search-normal.svg"
           className="w-6 h-6"
           alt="icon"
         />
@@ -32,7 +32,7 @@ export default function Header() {
           className="flex shrink-0 w-[50px] h-[50px] rounded-full overflow-hidden"
         >
           <img
-            src="assets/images/photos/photo-1.png"
+            src="/assets/images/photos/photo-1.png"
             className="w-full h-full object-cover"
             alt="profile photos"
           />
