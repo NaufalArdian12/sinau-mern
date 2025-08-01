@@ -2,8 +2,8 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import Sidebar from "./sidebar";
 import Header from "./header";
-import Courses from "../pages/ManagerHome/latest-courses";
-import Students from "../pages/ManagerHome/latest-students";
+import Courses from "../pages/Manager/home/latest-courses";
+import Students from "../pages/Manager/home/latest-students";
 import Stats from "./stats";
 
 export default function LayoutDashboard() {
