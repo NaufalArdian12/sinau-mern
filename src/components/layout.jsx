@@ -9,7 +9,7 @@ import Stats from "./stats";
 export default function LayoutDashboard() {
   return (
     <div className="flex min-h-screen">
-    <Sidebar />
+      <Sidebar />
       <main className="flex flex-col flex-1 gap-[30px] p-[30px] ml-[290px]">
         <Header />
         <header className="flex items-center justify-between gap-[30px]">
@@ -21,17 +21,13 @@ export default function LayoutDashboard() {
           </div>
           <div className="flex items-center gap-3">
             <Link
-
-
               to="#"
-              className="w-fit rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap"
-            >
+              className="w-fit rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap">
               Customize
             </Link>
             <Link
               to=""
-              className="w-fit rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap"
-            >
+              className="w-fit rounded-full p-[14px_20px] font-semibold text-[#FFFFFF] bg-[#662FFF] text-nowrap">
               Export Data
             </Link>
           </div>
