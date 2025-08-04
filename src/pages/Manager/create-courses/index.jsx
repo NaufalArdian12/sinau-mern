@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function ManageCreateCoursePage() {
   return (
@@ -9,9 +10,9 @@ export default function ManageCreateCoursePage() {
                     <p class="text-[#838C9D] mt-[1]">Create new future for company</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <a href="#" class="w-fit rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap">
+                    <Link to="#" class="w-fit rounded-full border border-[#060A23] p-[14px_20px] font-semibold text-nowrap">
                         Import from BWA
-                    </a>
+                    </Link>
                 </div>
             </header>
             <form action="manage-course.html" class="flex flex-col w-[550px] rounded-[30px] p-[30px] gap-[30px] bg-[#F8FAFB]">
