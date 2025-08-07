@@ -161,7 +161,7 @@ export default function ManageContentPage() {
                 Table,
                 Undo,
               ],
-              initialData: "<h1>Hello from CKEditor 5!</h1>",
+              initialData: "<h1>Add Description here</h1>",
             }}
           />
         </div>
