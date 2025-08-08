@@ -8,7 +8,7 @@ export default function LayoutDashboard() {
 
   return (
     <>
-      {!ispreviewPage !== null ? (
+      {ispreviewPage ? (
         <Outlet />
       ) : (
         <div className="flex min-h-screen">
