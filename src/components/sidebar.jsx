@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SidebarItem from "./sidebar-item"; // pastikan path-nya benar
+import PropTypes from "prop-types";
 
-export default function Sidebar() {
+export default function Sidebar({ isAdmin = true }) {
   return (
     <aside className="sidebar-container fixed h-[calc(100vh-20px)] w-full max-w-[280px] my-[10px] ml-[10px] bg-[#060A23] overflow-hidden flex flex-1 rounded-[20px]">
       <div className="scroll-container flex w-full overflow-y-scroll hide-scrollbar">
@@ -15,50 +16,46 @@ export default function Sidebar() {
             <p className="font-semibold text-xs leading-[18px] text-white">
               GENERAL
             </p>
-
             <SidebarItem
-              to="/manager"
+              to={isAdmin ? "/manager" : "/student"}
               icon="/assets/images/icons/3dcube-white.svg"
               label="Overview"
               exact // hanya untuk route root
             />
-
-            <SidebarItem
-              to="/manager/courses"
-              icon="/assets/images/icons/note-favorite-white.svg"
-              label="Courses"
-            />
-
-            <SidebarItem
-              to="/manager/categories"
-              icon="/assets/images/icons/crown-white.svg"
-              label="Categories"
-            />
-
-            <SidebarItem
-              to="/manager/students"
-              icon="/assets/images/icons/profile-2user-white.svg"
-              label="Students"
-            />
+            {isAdmin && (
+              <>
+                <SidebarItem
+                  to="/manager/courses"
+                  icon="/assets/images/icons/note-favorite-white.svg"
+                  label="Courses"
+                />
+                <SidebarItem
+                  to="/manager/categories"
+                  icon="/assets/images/icons/crown-white.svg"
+                  label="Categories"
+                />
+                <SidebarItem
+                  to="/manager/students"
+                  icon="/assets/images/icons/profile-2user-white.svg"
+                  label="Students"
+                />
+              </>
+            )}
           </ul>
-
           <ul className="flex flex-col gap-4">
             <p className="font-semibold text-xs leading-[18px] text-white">
               OTHERS
             </p>
-
             <SidebarItem
               to="/manager/subscription"
               icon="/assets/images/icons/security-card-white.svg"
               label="Subscription"
             />
-
             <SidebarItem
               to="/manager/rewards"
               icon="/assets/images/icons/cup-white.svg"
               label="Rewards"
             />
-
             <SidebarItem
               to="/manager/settings"
               icon="/assets/images/icons/setting-2-white.svg"
@@ -76,3 +73,6 @@ export default function Sidebar() {
     </aside>
   );
 }
+Sidebar.propTypes = {
+  isAdmin: PropTypes.bool,
+};
