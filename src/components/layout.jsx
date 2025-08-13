@@ -7,11 +7,12 @@ import PropTypes from "prop-types";
 
 
 export default function LayoutDashboard({isAdmin = true}) {
-  const ispreviewPage = useMatch("/manager/courses/:id/preview");
+  const isManagerPreviewPage = useMatch("/manager/courses/:id/preview");
+  const isStudentPreviewPage = useMatch("/student/detail-course/:id");
 
   return (
     <>
-      {ispreviewPage ? (
+      {isManagerPreviewPage || isStudentPreviewPage ? (
         <Outlet />
       ) : (
         <div className="flex min-h-screen">
