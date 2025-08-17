@@ -23,8 +23,8 @@ export default function Form() {
                 </Link>
             </div>
         </nav>
-        <div className="flex items-center justify-center gap-[109px] my-auto mt-20" >
-            <form action="signin.html" className="flex flex-col w-[400px] h-fit rounded-[20px] border border-[#262A56] p-[30px] gap-[30px] bg-[#080A2A]">
+        <div className="flex items-center justify-center gap-20 my-auto mt-20" >
+            <form action="signin.html" className="flex flex-col w-[400px] h-fit rounded-[20px] border border-[#262A56] p-[30px] gap-7 bg-[#080A2A]">
                 <div>
                     <h2 className="font-bold text-[26px] leading-[39px] text-white">Sign Up</h2>
                     <p className="text-[#6B6C7F]">Manage your employees easily</p>

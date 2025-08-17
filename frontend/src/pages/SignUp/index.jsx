@@ -5,8 +5,8 @@ import { Preview } from '../Landing/demo'
 
 export default function SignUpPage() {
   return (
-    //<Form />
-    <Pricing />
+    <Form />
+    //<Pricing />
     // <Preview />
   )
 }
