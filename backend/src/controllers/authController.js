@@ -1,14 +1,16 @@
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
+import User from "../models/userModel.js";
 
 export const signUpAction = async (req, res) => {
   try {
     const body = req.body;
 
-    const hashpassword = await bcrypt.hash(body.password, 12);
+    const hashpassword = bcrypt.hashSync(body.password, 12);
 
     const user = new User({
       name: body.name,
       email: body.email,
+      photo: 'default.jpg',
       password: hashpassword,
       role: "manager",
     });
