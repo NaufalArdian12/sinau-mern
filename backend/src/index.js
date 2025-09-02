@@ -23,6 +23,7 @@ app.get('/', (req, res) => {
 })
 
 app.use("/api", globalRoutes)
+app.use("/api", paymentRoutes)
 app.use("/api", authroutes)
 
 app.listen(port, () => {
