@@ -5,6 +5,7 @@ import bodyParser from 'body-parser'
 import globalRoutes  from "./routes/globalRoutes.js"
 import authroutes from './routes/authRoutes.js'
 import connectDB from './utils/database.js'
+import paymentRoutes from './routes/paymentRoutes.js'
 
 const app = express()
 

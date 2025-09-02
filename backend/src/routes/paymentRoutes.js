@@ -1,8 +1,8 @@
 import express from "express";
-import { processPayment } from "../controllers/paymentController.js";
+import { handlePayment } from "../controllers/paymentController.js";
 
 const paymentRoutes = express.Router();
 
-paymentRoutes.post("/handle-payment-midtrans", processPayment);
+paymentRoutes.post("/handle-payment-midtrans", handlePayment);
 
 export default paymentRoutes;
