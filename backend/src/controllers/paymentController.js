@@ -8,37 +8,25 @@ export const handlePayment = async (req, res) => {
 
     switch (body.transaction_status) {
       case "capture":
-        // For credit card, we need to check whether transaction is challenge by FDS or not
-        if (body.fraud_status === "accept") {
-          // TODO set transaction as success
-          await TransactionModel.findOneAndUpdate(
-            { _id: order_id },
-            { status: "success" }
-          );
-        } else {
-          // TODO set transaction as failed
-          await TransactionModel.findOneAndUpdate(
-            { _id: order_id },
-            { status: "failed" }
-          );
-        }
-        break;
       case "settlement":
-        // TODO set transaction as success
-        await TransactionModel.findOneAndUpdate(
-          { _id: order_id },
-          { status: "success" }
-        );
+        await TransactionModel.findByIdAndUpdate(order_id, {
+          status: "completed",
+        });
         break;
       case "deny":
-        // TODO set transaction as failed
-        await TransactionModel.findOneAndUpdate(
-          { _id: order_id },
-          { status: "failed" }
-        );
+      case "cancel":
+      case "failure":
+      case "expire":
+        await TransactionModel.findByIdAndUpdate(order_id, {
+          status: "failed",
+        });
+        break;
+      default:
+        break;
     }
+
+    return res.status(200).json({ message: "success", data: {} });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: "Internal Server Error" });
+    return res.status(500).json({ error: error.message });
   }
 };
