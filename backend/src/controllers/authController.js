@@ -22,11 +22,11 @@ export const signUpAction = async (req, res) => {
     //action payment gateway midtrans
 
     const transaction = new TransactionModel({
-      userId: user._id,
+      user: user._id,
       price: 100000,
     });
 
-    const midtransRes = await fetch(midtransUrl, {
+    const midtrans = await fetch(midtransUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,29 +37,18 @@ export const signUpAction = async (req, res) => {
           order_id: transaction._id.toString(),
           gross_amount: transaction.price,
         },
-        credit_card: { secure: true },
-        customer_details: { email: user.email },
-        callbacks: { finish: process.env.FINISH_CALLBACK_URL },
+        customer_details: {
+          first_name: user.name,
+          email: user.email,
+        },
       }),
     });
 
-    const raw = await midtransRes.text();
-    let resMidtrans;
-    try {
-      resMidtrans = JSON.parse(raw);
-    } catch {
-      resMidtrans = { parse_error: true, raw };
-    }
+    const resMidtrans = await midtrans.json();
 
-    console.log("[MIDTRANS STATUS]", midtransRes.status);
-    console.log("[MIDTRANS BODY]", resMidtrans);
-
-    if (!midtransRes.ok || !resMidtrans?.redirect_url) {
-      return res.status(502).json({
-        message: "Midtrans error",
-        detail: resMidtrans, // biar kelihatan salahnya apa (status_code, error_messages, dll)
-      });
-    }
+    transaction.set({
+      midtrans_payment_url: resMidtrans.redirect_url,
+    });
 
     await user.save();
     await transaction.save();
