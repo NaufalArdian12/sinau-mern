@@ -75,7 +75,7 @@ export default function SignUpPage() {
                 </div>
             </div>
             ) : (
-                <Pricing dataSignUp={dataSignUp} />
+                <Pricing data={dataSignUp} />
             )}
         </>
     )
