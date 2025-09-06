@@ -5,6 +5,7 @@ import TransactionModel from "../models/transactionModel.js";
 export const signUpAction = async (req, res) => {
   const midtransUrl = process.env.MIDTRANS_URL;
   const midtransAuthString = process.env.MIDTRANS_AUTH_STRING;
+  const midtransSuccessUrl = process.env.FINISH_CALLBACK_URL;
 
   try {
     const body = req.body;
@@ -40,6 +41,9 @@ export const signUpAction = async (req, res) => {
         customer_details: {
           first_name: user.name,
           email: user.email,
+        },
+        callbacks: {
+          finish: midtransSuccessUrl,
         },
       }),
     });
