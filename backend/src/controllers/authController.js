@@ -66,3 +66,34 @@ export const signUpAction = async (req, res) => {
     res.status(500).json({ error: "Something went wrong" });
   }
 };
+
+export const signInAction = async (req, res) => {
+  try {
+    const body = req.body;
+
+    const existingUser = await userModel.findOne().where("email").equals(body.email);
+
+    if (!existingUser) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    const comparePassword = bcrypt.compareSync(body.password, existingUser.password);
+
+    if (!comparePassword) {
+      return res.status(400).json({ error: "Invalid credentials" });
+    }
+
+    const isValidUser = await transactionModel.findOne({
+      user: existingUser._id,
+      status: "success",
+    });
+
+    if (existingUser.role === "student" && !isValidUser) {
+      return res.status(403).json({ message: "User Not Verified" });
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+};
