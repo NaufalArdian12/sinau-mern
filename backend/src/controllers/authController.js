@@ -71,13 +71,19 @@ export const signInAction = async (req, res) => {
   try {
     const body = req.body;
 
-    const existingUser = await userModel.findOne().where("email").equals(body.email);
+    const existingUser = await userModel
+      .findOne()
+      .where("email")
+      .equals(body.email);
 
     if (!existingUser) {
       return res.status(400).json({ error: "User not found" });
     }
 
-    const comparePassword = bcrypt.compareSync(body.password, existingUser.password);
+    const comparePassword = bcrypt.compareSync(
+      body.password,
+      existingUser.password
+    );
 
     if (!comparePassword) {
       return res.status(400).json({ error: "Invalid credentials" });
@@ -92,6 +98,25 @@ export const signInAction = async (req, res) => {
       return res.status(403).json({ message: "User Not Verified" });
     }
 
+    const token = jwt.sign(
+      {
+        data: {
+          _id: existingUser._id.toString(),
+        },
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    return res.json({
+      message: "Sign In Success",
+      data: {
+        name: existingUser.name,
+        email: existingUser.email,
+        role: existingUser.role,
+        token,
+      },
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Something went wrong" });
