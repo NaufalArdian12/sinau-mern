@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import User from "../models/userModel.js";
-import TransactionModel from "../models/transactionModel.js";
+import transactionModel from "../models/transactionModel.js";
+import jwt from "jsonwebtoken";
 
 export const signUpAction = async (req, res) => {
   const midtransUrl = process.env.MIDTRANS_URL;
@@ -71,7 +72,7 @@ export const signInAction = async (req, res) => {
   try {
     const body = req.body;
 
-    const existingUser = await userModel
+    const existingUser = await User
       .findOne()
       .where("email")
       .equals(body.email);
