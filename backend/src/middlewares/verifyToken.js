@@ -3,14 +3,18 @@ import userModel from "../models/userModel.js";
 
 export const verifyToken = async (req, res, next) => {
   const secretKey = process.env.JWT_SECRET ?? "";
+  const authHeader = req.headers.authorization;
 
-  if (req?.headers?.authorization?.split("") === "JWT") {
-    const decoded = jwt.verify(
-      req.headers.authorization.split(" ")[1],
-      secretKey
-    );
+  if (!authHeader || !authHeader.startsWith("JWT ")) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(token, secretKey);
     const user = await userModel.findById(
-      decoded.data.id,
+      decoded.data._id,
       "_id name email role"
     );
 
@@ -23,9 +27,10 @@ export const verifyToken = async (req, res, next) => {
       name: user.name,
       email: user.email,
       role: user.role,
-    }
+    };
+
     next();
-  } else {
-    res.status(401).json({ message: "Unauthorized" });
+  } catch (err) {
+    return res.status(401).json({ message: "Invalid Token" });
   }
 };
