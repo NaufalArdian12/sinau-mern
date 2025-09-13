@@ -11,3 +11,10 @@ export const signUpSchema = z.object({
 });
 
 export const signInSchema = signUpSchema.omit({ name: true });
+
+export const mutateCourseSchema = z.object({
+  name: z.string().min(5, "Title must be at least 2 characters long"),
+  categoryId: z.string().min(1, "Category is required"),
+  tagline: z.string().min(10, "Tagline must be at least 10 characters long"),
+  description: z.string().min(20, "Description must be at least 20 characters long"),
+});
