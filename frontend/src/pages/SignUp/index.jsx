@@ -64,7 +64,7 @@ export default function SignUpPage() {
                         </div>
                         {errors.password && <p className="text-red-500">{errors.password.message}</p>}
                         <hr className="border-[#262A56]" />
-                        <button type="submit" className="w-full rounded-full border p-[14px_20px] text-center font-semibold text-white bg-[#662FFF] border-[#8661EE] shadow-[-10px_-6px_10px_0_#7F33FF_inset]">
+                        <button type="submit" className="hover:cursor-pointer w-full rounded-full border p-[14px_20px] text-center font-semibold text-white bg-[#662FFF] border-[#8661EE] shadow-[-10px_-6px_10px_0_#7F33FF_inset]">
                             Sign Up Now
                         </button>
                     </form>
