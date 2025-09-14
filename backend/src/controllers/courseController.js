@@ -36,7 +36,7 @@ export const postCourse = async (req, res) => {
     const parse = mutateCourseSchema.safeParse(body);
 
     if (!parse.success) {
-      const errorMessages = parse.error.errors.map((err) => err.message);
+      const errorMessages = parse.error.issues.map((err) => err.message);
 
       if (req?.file?.path && fs.existsSync(req?.file?.path)) {
         fs.unlinkSync(req?.file?.path);
