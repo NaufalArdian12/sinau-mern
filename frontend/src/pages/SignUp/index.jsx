@@ -7,8 +7,8 @@ import { signUpSchema } from '../../utils/zodSchema.js'
 import Pricing from './pricing'
 
 export default function SignUpPage() {
-    const [ dataSignUp, setDataSignUp ] = useState(null);
-    const [ mode, setMode ] = useState('AUTH');
+    const [dataSignUp, setDataSignUp] = useState(null);
+    const [mode, setMode] = useState('AUTH');
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(signUpSchema),
