@@ -1,13 +1,26 @@
 import multer from "multer";
+import path from "path";
+import mime from "mime-types";
 
 export const fileStorageCourse = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb("public/uploads/courses");
+    cb(null, "public/uploads/courses");
   },
   filename: (req, file, cb) => {
-    const ext = file.mimetype.split(".")[1];
-    const uniqeId = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    cb(null, `${file.fieldname}-${uniqeId}.${ext}`);
+    // Ambil ekstensi dari originalname
+    let ext = path.extname(file.originalname);
+
+    // Kalau nggak ada, fallback dari mimetype
+    if (!ext) {
+      const fromMime = mime.extension(file.mimetype); // contoh: image/png -> png
+      if (fromMime) ext = `.${fromMime}`;
+    }
+
+    // Fallback terakhir kalau nggak ada juga
+    if (!ext) ext = ".bin";
+
+    const uniqueId = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    cb(null, `${file.fieldname}-${uniqueId}${ext}`);
   }
 });
 
