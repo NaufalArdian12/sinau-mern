@@ -43,7 +43,7 @@ export default function Sidebar({ isAdmin = true }) {
             )}
           </ul>
           <ul className="flex flex-col gap-4">
-            <p className="font-semibold text-xs leading-[18px] text-white">
+            <p className="font-semibold text-xs leading-[18px] text-white"> 
               OTHERS
             </p>
             <SidebarItem
