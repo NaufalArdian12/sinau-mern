@@ -20,15 +20,16 @@ export const getCourses = async (req, res) => {
         select: "name",
       });
 
-      const imageUrl = process.env.APP_URL + '/uploads/courses/'
+    const imageUrl = process.env.APP_URL + "/uploads/courses/";
 
-      const response = courses.map((item) => {
-        return {
-          ...item.toObject(),
-          thumbnail_url: imageUrl + item.thumbnail
-        }
-      })
-          res.json({
+    const response = courses.map((item) => {
+      return {
+        ...item.toObject(),
+        thumbnail_url: imageUrl + item.thumbnail,
+        students_count: item.students.length,
+      };
+    });
+    res.json({
       message: "Get courses successfully",
       data: response,
     });
