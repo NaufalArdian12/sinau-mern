@@ -92,3 +92,50 @@ export const postCourse = async (req, res) => {
     res.status(500).json({ error: "Something went wrong" });
   }
 };
+
+export const updateCourse = async (req, res) => {
+  try {
+    const body = req.body;
+    const courseId = req.params.id;
+
+    const parse = mutateCourseSchema.safeParse(body);
+
+    if (!parse.success) {
+      const errorMessages = parse.error.issues.map((err) => err.message);
+
+      if (req?.file?.path && fs.existsSync(req?.file?.path)) {
+        fs.unlinkSync(req?.file?.path);
+      }
+      return res.status(400).json({ error: errorMessages });
+    }
+
+    const category = await categoryModel.findById(parse.data.categoryId);
+    const oldCourse = await courseModel.findById(courseId);
+
+    if (!oldCourse) {
+      return res.status(404).json({ error: "Course not found" });
+    }
+
+    if (!category) {
+      return res.status(400).json({ error: "Category not found" });
+    }
+
+    await courseModel.findByIdAndUpdate(
+      courseId,
+      {
+        name: parse.data.name,
+        category: category._id,
+        tagline: parse.data.tagline,
+        description: parse.data.description,
+        thumbnail: req?.file ? req.file?.filename : oldCourse.thumbnail,
+        manager: req.user._id,
+      },
+      { new: true }
+    );
+
+    return res.json({ message: "update course successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Something went wrong" });
+  }
+};
