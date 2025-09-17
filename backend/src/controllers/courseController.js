@@ -184,8 +184,8 @@ export const deleteCourse = async (req, res) => {
       "public/uploads/courses",
       course.thumbnail
     );
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
+    if (fs.access(filePath)) {
+      fs.unlink(filePath);
     }
 
     if (!course) {
