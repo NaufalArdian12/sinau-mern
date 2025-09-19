@@ -11,6 +11,8 @@ import ManageContentPage from "../pages/Manager/course-content-create";
 import ManageCoursePreviewPage from "../pages/Manager/course-preview";
 import ManageStudentsPage from "../pages/Manager/students";
 import StudentPage from "../pages/student/StudentOverview";
+import secureLocalStorage from "react-secure-storage";
+import { MANAGER_SESSION, STORAGE_KEY } from "../utils/const.js";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/manager",
+    id: MANAGER_SESSION,
+    loader: async () => {
+      const session = secureLocalStorage.getItem(STORAGE_KEY);
+
+      console.log(session);
+
+      if (!session && session?.role !== "manager") {
+        window.location.href = "/manager/sign-in";
+        return null;
+      }
+
+      return true;
+    },
     element: <LayoutDashboard />,
     children: [
       {
