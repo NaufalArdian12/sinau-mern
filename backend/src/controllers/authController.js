@@ -23,7 +23,7 @@ export const signUpAction = async (req, res) => {
 
     //action payment gateway midtrans
 
-    const transaction = new TransactionModel({
+    const transaction = new transactionModel({
       user: user._id,
       price: 100000,
     });
