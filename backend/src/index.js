@@ -32,8 +32,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// kalau mau handle preflight manual, pakai opsi yang sama:
-app.options("*", cors(corsOptions));
 
 app.get("/", (_, res) => res.send("Hello Worldss"));
 app.get(
