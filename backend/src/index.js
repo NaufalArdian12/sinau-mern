@@ -28,4 +28,4 @@ app.use("/api", paymentRoutes);
 app.use("/api", authroutes);
 app.use("/api", courseRoutes);
 
-module.exports = app;
+export default app;
