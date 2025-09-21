@@ -5,10 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.js",
-    "start": "node server.js",
-    "build": "echo \"no build step for backend\""
+    "dev": "node src/index.js",
+    "build": "echo \"no build step for Vercel\""
   },
   "keywords": [],
   "author": "",

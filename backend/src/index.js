@@ -29,6 +29,4 @@ app.use("/api", paymentRoutes)
 app.use("/api", authroutes)
 app.use("/api", courseRoutes)
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+export default app
