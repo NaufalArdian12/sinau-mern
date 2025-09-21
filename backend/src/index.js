@@ -9,7 +9,6 @@ import paymentRoutes from "./routes/paymentRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
 
 const app = express();
-const express = require("express");
 
 dotenv.config();
 
