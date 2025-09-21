@@ -1,19 +1,23 @@
 import mongoose from "mongoose";
 
-let cached = global.__mongoose;
-if (!cached) cached = global.__mongoose = { conn: null, promise: null };
+export default function connectDB() {
+  const DATABASE_URL = process.env.DATABASE_URL ?? "";
 
-export default async function connectDB() {
-  if (cached.conn) return cached.conn;
-  if (!cached.promise) {
-    const uri = process.env.DATABASE_URL;
-    if (!uri) throw new Error("DATABASE_URL not set");
-    cached.promise = mongoose.connect(uri, {
-      serverSelectionTimeoutMS: 20000,
-      connectTimeoutMS: 20000,
-      socketTimeoutMS: 60000,
-    }).then((m) => m);
+  try {
+    mongoose.connect(DATABASE_URL);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
   }
-  cached.conn = await cached.promise;
-  return cached.conn;
+
+  const dbConn = mongoose.connection
+
+  dbConn.once("open", () => {
+    console.log(`Connected to MongoDB at ${DATABASE_URL}`);
+  });
+
+  dbConn.on("error", (err) => {
+    console.error(`MongoDB connection error: ${err}`);
+    process.exit(1);
+  });
 }
