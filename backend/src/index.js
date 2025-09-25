@@ -44,4 +44,8 @@ app.use("/api", paymentRoutes);
 app.use("/api", authroutes);
 app.use("/api", courseRoutes);
 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
 export default app;
