@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import ManagerHomePage from "../pages/Manager/home";
 import SignInPage from "../pages/SignIn";
 import SignUpPage from "../pages/SignUp";
@@ -13,11 +13,12 @@ import ManageStudentsPage from "../pages/Manager/students";
 import StudentPage from "../pages/student/StudentOverview";
 import secureLocalStorage from "react-secure-storage";
 import { MANAGER_SESSION, STORAGE_KEY } from "../utils/const.js";
+import { getCourse } from "../services/courseService.js";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <ManagerHomePage />,
+    loader: () => redirect("/manager"),
   },
   {
     path: "/manager/sign-in",
@@ -35,61 +36,44 @@ const router = createBrowserRouter([
     path: "/manager",
     id: MANAGER_SESSION,
     loader: async () => {
-      const session = secureLocalStorage.getItem(STORAGE_KEY);
-
-      console.log(session);
-
-      if (!session && session?.role !== "manager") {
-        window.location.href = "/manager/sign-in";
-        return null;
+      const raw = secureLocalStorage.getItem(STORAGE_KEY);
+      let session = null;
+      try {
+        session = raw ? JSON.parse(raw) : null;
+      } catch {
+        session = null;
       }
 
-      return true;
+      if (!session || session.role !== 'manager') {
+        return redirect("/manager/sign-in");
+      }
+      return session;
     },
     element: <LayoutDashboard />,
     children: [
+      { index: true, element: <ManagerHomePage /> },
+      { path: "courses", element: <ManageCoursePage /> },
       {
-        index: true,
-        element: <ManagerHomePage />,
+        path: "courses/create", loader: async () => {
+          const data = await getCourse();
+          console.log(data);
+          return data;
+        },
+        element: <ManageCreateCoursePage />
+
       },
-      {
-        path: "/manager/courses",
-        element: <ManageCoursePage />,
-      },
-      {
-        path: "/manager/courses/create",
-        element: <ManageCreateCoursePage />,
-      },
-      {
-        path: "/manager/courses/:id",
-        element: <ManagerCourseDetailPage />,
-      },
-      {
-        path: "/manager/courses/:id/create",
-        element: <ManageContentPage />,
-      },
-      {
-        path: "/manager/courses/:id/preview",
-        element: <ManageCoursePreviewPage />,
-      },
-      {
-        path: "/manager/students",
-        element: <ManageStudentsPage />,
-      },
+      { path: "courses/:id", element: <ManagerCourseDetailPage /> },
+      { path: "courses/:id/create", element: <ManageContentPage /> },
+      { path: "courses/:id/preview", element: <ManageCoursePreviewPage /> },
+      { path: "students", element: <ManageStudentsPage /> },
     ],
   },
   {
     path: "/student",
     element: <LayoutDashboard isAdmin={false} />,
     children: [
-      {
-        index: true,
-        element: <StudentPage />, // Placeholder for student home page
-      },
-      {
-        path: "/student/detail-course/:id",
-        element: <ManageCoursePreviewPage />,
-      },
+      { index: true, element: <StudentPage /> },
+      { path: "detail-course/:id", element: <ManageCoursePreviewPage /> },
     ],
   },
 ]);
