@@ -1,8 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import CardCourse from './card';
 
 export default function ManageCoursePage() {
+    const courses = useLoaderData();
+
+    console.log(courses);
+
   return (
     <>
        <header className="flex items-center justify-between gap-[30px]">
@@ -20,8 +24,6 @@ export default function ManageCoursePage() {
                 </div>
             </header>
             <section id="CourseList" className="flex flex-col w-full rounded-[30px] p-[30px] gap-[30px] bg-[#F8FAFB]">
-              <CardCourse />
-              <CardCourse />
               <CardCourse />
                 {/* <div id="Pagination" className="flex items-center gap-3">
                     <button type="button" className="flex shrink-0 w-9 h-9 rounded-full items-center justify-center text-center transition-all duration-300 hover:bg-[#662FFF] hover:text-white hover:border-0 bg-[#662FFF] text-white">
