@@ -1,4 +1,4 @@
-import { apiInstanceToken } from "../utils/axios.js";
+import { apiInstanceAuth } from "../utils/axios.js";
 
-export const getCourse = async (id) =>
-  apiInstanceToken.get(`/courses/${id}`).then((res) => res.data);
+export const getCourses = async () =>
+  apiInstanceAuth.get(`/courses`).then((res) => res.data);
