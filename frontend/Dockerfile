@@ -1,0 +1,15 @@
+FROM node:20
+
+# Install pnpm globally
+RUN npm install -g pnpm
+
+WORKDIR /app
+
+COPY pnpm-lock.yaml ./
+COPY package*.json ./
+RUN pnpm install
+
+COPY . .
+
+EXPOSE 5173
+CMD ["pnpm", "run", "dev"]
